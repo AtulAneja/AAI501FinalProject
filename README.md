@@ -1,111 +1,108 @@
 # Global Trade Analysis and Prediction System
 
 ## Project Overview
-This project implements a machine learning-based system for analyzing and predicting global trade patterns, with a specific focus on the impact of tariffs on international trade flows. The system uses historical trade data to train a deep learning model that can predict future trade patterns and assess the potential impact of tariff changes.
+This project implements a comprehensive system for analyzing and predicting global trade patterns, economic growth, and trade relationships between countries. The system uses various machine learning models and statistical analysis to predict future trade patterns, GDP growth, and assess economic indicators.
 
 ## Project Structure
 ```
 project/
-├── src/
-│   ├── data/           # Data processing and loading
-│   ├── models/         # Model architecture and training
-│   └── utils/          # Utility functions and visualization
-├── docs/               # Documentation and reports
-└── data/              # Raw data files
+├── src/                    # Source code directory
+├── data/                   # Raw data files
+├── docs/                   # Documentation and reports
+├── cpi_per_country.csv     # Consumer Price Index data
+├── GDP1960-2023.csv        # Historical GDP data
+├── 34_years_world_export_import_dataset.csv  # Trade data
+├── World Census.xls        # Population and demographic data
+├── Trade Growth Prediction_using CAGR indicator.ipynb  # CAGR analysis
+├── AAI_501_ClassificationModel_Predictive_GDP_Growth_using_CAGR_2004-2023.ipynb  # GDP growth prediction
+├── load_normalized_annual_trade_dataset.py   # Data preprocessing
+├── lstm_mult_feature_model.py                # LSTM model implementation
+├── catboost_gradient_boost_model.py          # CatBoost model implementation
+├── trade_analysis.py                         # Trade analysis utilities
+└── requirements.txt                          # Project dependencies
 ```
 
-## Methodology
+## Key Components
 
-### Data Processing
-1. **Data Collection**: Historical trade data from 1992-2023
-2. **Preprocessing**:
-   - Handling missing values
-   - Log transformation for large values
-   - Robust scaling for model stability
-   - Country-specific tariff integration
+### Data Analysis and Processing
+- **Trade Data Analysis**: Analysis of 34 years of world export/import data
+- **GDP Growth Prediction**: Using CAGR indicators and machine learning models
+- **Economic Indicators**: Integration of CPI, GDP, and census data
+- **Data Normalization**: Preprocessing and normalization of trade datasets
 
-### Model Architecture
-The project uses a deep neural network with the following architecture:
-- Input Layer: Size based on historical trade features
-- Hidden Layers: 
-  - Dense layer (64 units) with ReLU activation
-  - Dropout (0.2) for regularization
-  - Dense layer (32 units) with ReLU activation
-  - Dropout (0.2) for regularization
-- Output Layer: Single unit with linear activation
+### Machine Learning Models
+1. **LSTM Model** (`lstm_mult_feature_model.py`)
+   - Multi-feature time series prediction
+   - Long-term trade pattern analysis
+   - Sequence modeling for economic trends
 
-### Training Process
-- Loss Function: Huber loss for robustness against outliers
-- Optimizer: Adam with gradient clipping
-- Training Strategy:
-  - Early stopping to prevent overfitting
-  - Learning rate reduction on plateau
-  - 50 epochs with batch size of 32
+2. **CatBoost Model** (`catboost_gradient_boost_model.py`)
+   - Gradient boosting for trade prediction
+   - Feature importance analysis
+   - Robust prediction handling
 
-### Prediction Methodology
-1. **Initial Predictions**: Based on historical growth rates
-2. **Tariff Impact**: 
-   - Gradual implementation of tariff effects
-   - Country-specific tariff rates
-   - Maximum impact capped at 30% of tariff rate
-3. **Growth Rate Calculation**: 
-   - Linear growth rates from last 5 years
-   - Adjusted for tariff impacts post-2025
+3. **CAGR-based Analysis** (`Trade Growth Prediction_using CAGR indicator.ipynb`)
+   - Compound Annual Growth Rate calculations
+   - Growth trend analysis
+   - Future projections
 
-## Why This Model?
-
-### 1. Deep Learning Approach
-- **Complex Patterns**: Deep learning can capture complex, non-linear relationships in trade data
-- **Feature Learning**: Automatically learns relevant features from historical data
-- **Scalability**: Can handle large datasets and multiple features effectively
-
-### 2. Model Architecture Choices
-- **Dropout Layers**: Prevent overfitting in the presence of noisy trade data
-- **Huber Loss**: Robust against outliers in trade values
-- **Gradient Clipping**: Stabilizes training with large value ranges
-
-### 3. Data Processing Decisions
-- **Log Transformation**: Handles the large range of trade values
-- **Robust Scaling**: Reduces impact of outliers
-- **Mean Imputation**: Preserves data distribution for missing values
-
-### 4. Prediction Strategy
-- **Gradual Tariff Impact**: More realistic than immediate effects
-- **Country-Specific Rates**: Accounts for different trade relationships
-- **Growth Rate Adjustment**: Balances historical trends with tariff impacts
-
-## Results
-The model achieves:
-- Test Loss (Huber): 0.68
-- Test MAE: 1.09
-- Realistic predictions aligned with historical trends
-- Smooth transition in tariff impact predictions
-
-## Future Improvements
-1. Incorporate more economic indicators
-2. Add seasonal patterns in trade data
-3. Implement ensemble methods for more robust predictions
-4. Add confidence intervals to predictions
-5. Include more sophisticated tariff impact modeling
+### Visualization and Analysis
+- Trade pattern visualization
+- Economic growth analysis
+- Country-specific trade relationships
+- Interactive data exploration
 
 ## Requirements
 - Python 3.8+
-- TensorFlow 2.x
 - pandas
 - numpy
 - matplotlib
 - scikit-learn
-- xmltodict
+- tensorflow
+- catboost
+- jupyter
+- xlrd (for Excel file support)
 
 ## Usage
-1. Place trade data XML files in the data directory
-2. Run `python src/main.py`
-3. View generated visualizations and predictions
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Run data preprocessing:
+   ```bash
+   python load_normalized_annual_trade_dataset.py
+   ```
+
+3. Train models:
+   ```bash
+   python lstm_mult_feature_model.py
+   python catboost_gradient_boost_model.py
+   ```
+
+4. Explore analysis notebooks:
+   - Open `Trade Growth Prediction_using CAGR indicator.ipynb`
+   - Open `AAI_501_ClassificationModel_Predictive_GDP_Growth_using_CAGR_2004-2023.ipynb`
+
+## Results
+The system provides:
+- Trade pattern predictions
+- GDP growth forecasts
+- Economic indicator analysis
+- Country-specific trade relationship insights
+- Visualizations of economic trends
+
+## Future Improvements
+1. Enhanced feature engineering
+2. Integration of more economic indicators
+3. Real-time data updates
+4. Advanced visualization dashboards
+5. API endpoints for predictions
+6. Automated report generation
 
 ## Documentation
 See the `docs/` directory for detailed documentation on:
 - Data processing pipeline
-- Model architecture
-- Training process
-- Prediction methodology
+- Model architectures
+- Analysis methodologies
 - Visualization techniques 
