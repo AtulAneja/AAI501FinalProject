@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error
 # Model metrics libraries
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-from src.data.data_loader import load_normalized_annual_world_trade_data
+from load_normalized_annual_trade_dataset import load_normalized_annual_world_trade_data
 import matplotlib.pyplot as plt
 
 def run_catboost_gradient_regression_example():
@@ -42,7 +42,7 @@ def run_catboost_gradient_regression_example():
         iterations=500,
         learning_rate=0.05,
         depth=6,
-        loss_function='MAE',
+        loss_function='RMSE',
         verbose=100
     )
     
